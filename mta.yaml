@@ -1,0 +1,26 @@
+_schema-version: "3.2"
+ID: mta_test_project
+version: 0.0.1
+modules:
+- name: mta-test-project-approuter
+  type: approuter.nodejs
+  path: mta-test-project-approuter
+  requires:
+  - name: mta_test_project_html_repo_runtime
+  - name: uaa_mta_test_project
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+resources:
+- name: mta_test_project_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_mta_test_project
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: mta_test_project-xsuaa-service
+    service-plan: application
